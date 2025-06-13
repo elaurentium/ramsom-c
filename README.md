@@ -1,0 +1,2 @@
+# ramsom-c
+encryption ransomware
