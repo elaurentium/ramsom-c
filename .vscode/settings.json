@@ -1,0 +1,7 @@
+{
+  "files.associations": {
+    "*.pyx": "python",
+    "stdio.h": "c",
+    "file.h": "c"
+  }
+}

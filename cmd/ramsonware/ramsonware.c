@@ -1,5 +1,5 @@
-#include <includes/file.h>
-#include <includes/banner.h>
+#include "file.h"
+#include "banner.h"
 
 void init() {
     banner();
