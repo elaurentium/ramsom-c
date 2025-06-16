@@ -65,11 +65,21 @@ int interessing_extension(const char *filename) {
 
     const char *ext = dot + 1;
 
-    for (int i = 0; extensions[i]; i++) {
-        if (strcmp(ext, extensions[i]) == 0) {
+    for (int i = 0; i < sizeof(extensions)/sizeof(extensions[0]); i++) {
+        if (strcasecmp(ext, extensions[i]) == 0) {
             return 1;
         }
     }
 
+    return 0;
+}
+
+
+int skip_directory(const char *path) {
+    for (int i = 0; i < sizeof(skip_dir)/sizeof(skip_dir[0]); i++) {
+        if (strstr(path, skip_dir[i]) != NULL) {
+            return 1;
+        }
+    }
     return 0;
 }
