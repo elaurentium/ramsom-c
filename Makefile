@@ -21,3 +21,4 @@ $(TARGET): $(SRC)
 clean:
 	rm -fr output.bin
 	rm -fr file
+	rm -fr tmp
